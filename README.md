@@ -17,6 +17,14 @@ They use no textures and no UVs, and leave no tiling seams. Everything is evalua
 
 > Requires **Unreal Engine 5.7 or newer**. The `.uasset` files are saved with 5.7 and will not open in older versions.
 
+## What you can build with it
+
+Every material below is **100% procedural**: no textures, no UVs, no tiling. Each one is built from the noises in this pack (Voronoi, Wave, Ridged, Domain Warp, Alligator…) and a handful of color and roughness parameters. Each row is **one** master material; the variants are just material instances with different parameters.
+
+![Procedural materials made with these noises](Images/materials_showcase.png)
+
+*These showcase materials are not included in this repository. They show what the noise functions can do.*
+
 ---
 
 ## Installation
