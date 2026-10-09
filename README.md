@@ -13,43 +13,58 @@ Seven material functions inspired by Blender and Houdini noises:
 
 They use no textures and no UVs, and leave no tiling seams. Everything is evaluated in 3D space, so the noise wraps cleanly around any mesh.
 
+The pack also includes **11 example master materials with 44 instances** and an overview map.
+
 ![Default look of every noise](Images/hero.png)
 
 > Requires **Unreal Engine 5.7 or newer**. The `.uasset` files are saved with 5.7 and will not open in older versions.
+> Ready-to-use packs for **5.7** and **5.8** are on the [Releases](https://github.com/intpoln/UE-Procedural-Noise3D/releases/latest) page.
 
 ## What you can build with it
 
-Every material below is **100% procedural**: no textures, no UVs, no tiling. Each one is built from the noises in this pack (Voronoi, Wave, Ridged, Domain Warp, Alligator…) and a handful of color and roughness parameters. Each row is **one** master material; the variants are just material instances with different parameters.
+Every material below is **100% procedural**: no textures, no UVs, no tiling. Each row is **one** master material; the variants are just material instances with different parameters. **All of them are included** in `Content/N3D/Materials/Examples`.
 
 ![Procedural materials made with these noises](Images/materials_showcase.png)
 
-*These showcase materials are not included in this repository. They show what the noise functions can do.*
+| Master | Built with |
+|---|---|
+| `M_N3D_Stone`, `M_N3D_Ground`, `M_N3D_Sand`, `M_N3D_Asphalt` | several layers of the noise functions; the bump of each layer follows its weight (`L1..L3 Weight`, `BumpStrength`) |
+| `M_N3D_Marble` | `MF_N3D_DomainWarp` |
+| `M_N3D_Leather` | `MF_N3D_Alligator` (leather, crocodile, snake and elephant skin) |
+| `M_N3D_Lava` | `MF_N3D_Alligator`, with emissive glow in the cracks |
+| `M_N3D_Metal`, `M_N3D_Wood`, `M_N3D_Water`, `M_N3D_StylizedGround` | compact custom HLSL, as a bonus |
+
+The overview map `Maps/Overview_N3D` shows every noise on a sphere and a cube, plus all the example materials.
+
+![Overview map](Images/overview_map.jpg)
 
 ---
 
 ## Installation
 
-1. Download the repository: **Code → Download ZIP**, or `git clone`.
+1. Download the pack for your engine version from [Releases](https://github.com/intpoln/UE-Procedural-Noise3D/releases/latest) (`N3D_UE5.7.zip` or `N3D_UE5.8.zip`), or the repository itself (**Code → Download ZIP**, 5.7 assets).
 2. Copy the **`Content/N3D`** folder into your project's **`Content`** folder:
    ```
    YourProject/
    └── Content/
        └── N3D/
-           ├── MF_N3D_Noise.uasset
-           ├── MF_N3D_Voronoi.uasset
-           ├── ...
-           └── Examples/
+           ├── MaterialFunctions/   MF_N3D_Noise, MF_N3D_Voronoi, ...
+           ├── Materials/           M_N3D_*_Preview (one per noise)
+           │   └── Examples/        example masters, Instances/ with the variants
+           └── Maps/                Overview_N3D
    ```
 3. Open or restart the editor.
 
 **Keep the folder name `N3D` and place it directly in `Content/`.** The example materials reference the functions by path (`/Game/N3D/...`). If you want the folder somewhere else, move it inside the Content Browser, not in Explorer, so Unreal fixes up the references.
+
+> Upgrading from the first version: the functions moved from `N3D/` to `N3D/MaterialFunctions/`. Delete the old `N3D` folder before copying the new one.
 
 ## Usage
 
 - In any material graph, right-click and type **`N3D`**, or find the functions in the palette under the **Noise 3D** category.
 - Or drag an `MF_N3D_*` asset from the Content Browser into the graph.
 - Plug `Fac`, `Color` or `Normal` wherever you need them.
-- `Examples/` contains one minimal preview material per noise (`M_N3D_*_Preview`).
+- `Materials/` contains one minimal preview material per noise (`M_N3D_*_Preview`); `Materials/Examples/` contains the example materials.
 
 Every input is optional and has a sensible default, so the function works as soon as you drop it in.
 
